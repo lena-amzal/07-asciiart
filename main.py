@@ -1,5 +1,4 @@
 #### Imports et définition des variables globales
-
 # Mandatory for the recursive solution to work on large inputs
 import sys
 sys.setrecursionlimit(2000)
@@ -9,38 +8,35 @@ sys.setrecursionlimit(2000)
 
 
 def artcode_i(s):
-    """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme itératif
-
-    Args:
-        s (str): la chaîne de caractères à encoder
-
-    Returns:
-        list: la liste des tuples (caractère, nombre d'occurences)
-    """
-    
-    # votre code ici
-
-    return [ ]
+    '''fonction itérative'''
+    liste_tuples=[]
+    nb_occurences=1
+    carac_ref=s[0]
+    for c in s[1:]:
+        if c==carac_ref:
+            nb_occurences+=1
+        else:
+            liste_tuples.append((carac_ref,nb_occurences))
+            nb_occurences=1
+            carac_ref=c
+    liste_tuples.append((carac_ref,nb_occurences))
+    return liste_tuples
 
 
 def artcode_r(s):
-    """retourne la liste de tuples encodant une chaîne de caractères passée en argument selon un algorithme récursif
-
-    Args:
-        s (str): la chaîne de caractères à encoder
-
-    Returns:
-        list: la liste des tuples (caractère, nombre d'occurences)
-    """
-    
-    # votre code ici
-
+    '''fonction récursive'''
     # cas de base
+    if not s:
+        return []
     # recherche nombre de caractères identiques au premier
+    liste_tuple=[]
+    i=1
+    while i<len(s) and s[i]==s[0]:
+        i+=1
+    liste_tuple.append((s[0],i))
     # appel récursif
-
-    return []
-    
+    r=liste_tuple+ artcode_r(s[i:])
+    return r
 
 #### Fonction principale
 
